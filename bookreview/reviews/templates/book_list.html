@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <style>
+        /* Reset and Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #f4f7f9;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        /* Add Book Button */
+        .add-book-btn {
+            display: inline-block;
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .add-book-btn:hover {
+            background-color: #1e40af;
+        }
+
+        /* Table Styling */
+        table {
+            width: 95%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #2563eb;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+        tr:hover {
+            background-color: #e0e7ff;
+            transition: 0.3s;
+        }
+
+        /* Action Buttons */
+        .edit-btn, .delete-btn {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            margin: 0 2px;
+            transition: 0.3s;
+        }
+        .edit-btn {
+            background-color: #10b981;
+        }
+        .edit-btn:hover {
+            background-color: #059669;
+        }
+        .delete-btn {
+            background-color: #ef4444;
+        }
+        .delete-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Back Home Link */
+        .back-home {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        .back-home:hover {
+            background-color: #111;
+        }
+
+        /* Responsive Table */
+        @media (max-width: 768px) {
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+            tr {
+                margin-bottom: 15px;
+                display: block;
+                background-color: #fff;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                border-radius: 10px;
+            }
+            th {
+                display: none;
+            }
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                font-weight: 600;
+                color: #2563eb;
+                text-align: left;
+            }
+            .actions {
+                text-align: center;
+            }
+        }
+        .review-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #130082; /* green */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 5px;
+    transition: 0.3s;
+}
+.review-btn:hover {
+    background-color: #059669;
+}
+    </style>
+</head>
+<body>
+
+    <center>
+        <a href="{% url 'add_book' %}" class="add-book-btn">+ Add New Book</a>
+    </center>
+
+    <h2>Book List</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for b in books %}
+        <tr>
+            <td data-label="ID">{{ forloop.counter }}</td>
+            <td data-label="Title">{{ b.title }}</td>
+            <td data-label="Author">{{ b.author }}</td>
+            <td data-label="Description">{{ b.description }}</td>
+            <td data-label="Published Date">{{ b.published_date }}</td>
+            <td data-label="REview count">{{ book.reviews.count }}</td>
+            <td data-label="Actions" class="actions">
+                <a href="{% url 'edit_book' b.id %}" class="edit-btn">Edit</a>
+                <a href="{% url 'delete_book' b.id %}" class="delete-btn">Delete</a>
+                <a href="{% url 'add_review' b.id %}" class="review-btn">Add Review</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+<center>
+    <a href="{% url 'dashboard' %}" class="back-home">Back to Dashboard</a>
+</center>
+
+
+</body>
+</html>

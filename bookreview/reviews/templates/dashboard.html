@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Book Review System</title>
+    <style>
+        /* Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            background-color: #1f2937;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #2563eb;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 240px;
+            padding: 40px;
+            flex: 1;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #111827;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        /* Cards */
+        .cards {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: #fff;
+            flex: 1 1 220px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .card .icon {
+            font-size: 2.5rem;
+            color: #2563eb;
+        }
+        .card .info {
+            display: flex;
+            flex-direction: column;
+        }
+        .card .info h3 {
+            color: #111827;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .card .info p {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                overflow-x: auto;
+                padding: 15px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+            .cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/books/">Books</a>
+        <a href="/add-book/">Add Book</a>
+        <a href="/reviews/">Reviews</a>
+        <a href="/logout/">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <header>
+            <h1>Dashboard</h1>
+            <p>Welcome to your Book Review Management System</p>
+        </header>
+
+        <div class="cards">
+            <!-- Total Books Card -->
+            <div class="card">
+                <div class="icon">📚</div>
+                <div class="info">
+                    <h3>Total Books</h3>
+                    <p>{{ total_books }}</p>
+                </div>
+            </div>
+
+            <!-- Total Reviews Card -->
+            <div class="card">
+                <div class="icon">✍️</div>
+                <div class="info">
+                    <h3>Total Reviews</h3>
+                    <p>{{ total_reviews }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
